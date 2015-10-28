@@ -1,0 +1,4 @@
+services:
+#    ap_index.example:
+#        class: AP\IndexBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
