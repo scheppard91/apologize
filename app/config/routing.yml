@@ -1,3 +1,7 @@
+ap_index:
+    resource: "@APIndexBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
