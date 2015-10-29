@@ -1,5 +1,6 @@
 ap_index:
-    resource: "@APIndexBundle/Resources/config/routing.yml"
+    resource: "@APIndexBundle/Controller/"
+    type:     annotation
     prefix:   /
 
 app:
