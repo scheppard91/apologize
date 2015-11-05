@@ -10,3 +10,5 @@
 /vendor/
 /web/bundles/
 /.idea
+/Capfile
+/app/config/deploy.rb
