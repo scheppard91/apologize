@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {% stylesheets 'css/bootstrap.min.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    <div id="header">
+        <div class="row">
+            {#accueil/presentation/qui somme nous/equipe/#}
+            <div class="col-xs-2">{{ 'index.nav.home'|trans }}</div>
+
+            {#nos jeux/serveur/#}
+            <div class="col-xs-2">3</div>
+
+            {#forum#}
+            <div class="col-xs-2">5</div>
+
+            {#contact#}
+            <div class="col-xs-2">6</div>
+        </div>
+    </div>
+    {% block mainbody %}{% endblock %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts 'js/bootstrap.min.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
