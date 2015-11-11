@@ -1,33 +1,36 @@
 {% extends '::base.html.twig' %}
 
-{% block stylesheets %}
-    {% stylesheets 'css/bootstrap.min.css' %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-{% endblock %}
-
 {% block body %}
     <div id="header">
-        <div class="row">
-            {#accueil/presentation/qui somme nous/equipe/#}
-            <div class="col-xs-2">{{ 'index.nav.home'|trans }}</div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Apologize</a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
 
-            {#nos jeux/serveur/#}
-            <div class="col-xs-2">3</div>
+                        {#accueil/presentation/qui somme nous/equipe/#}
+                        <li><a href="#">{{ 'index.nav.home'|trans }}</a></li>
 
-            {#forum#}
-            <div class="col-xs-2">5</div>
+                        {#nos jeux/serveur/#}
+                        <li><a href="#">Page 2</a></li>
 
-            {#contact#}
-            <div class="col-xs-2">6</div>
-        </div>
+                        {#forum#}
+                        <li><a href="#">Page 3</a></li>
+
+                        {#contact#}
+                        <li><a href="#">Page 4</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
     {% block mainbody %}{% endblock %}
 
-{% endblock %}
-
-{% block javascripts %}
-    {% javascripts 'js/bootstrap.min.js' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
 {% endblock %}
