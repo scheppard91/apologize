@@ -15,6 +15,7 @@
 /app/.htaccess
 /src/.htaccess
 /web/.htaccess
+/.sass-cache/
 
 # Npm
 /node_modules/
