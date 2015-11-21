@@ -40,7 +40,7 @@
 .glyphicon-eur                    { &:before { content: "\20ac"; } }
 .glyphicon-minus                  { &:before { content: "\2212"; } }
 .glyphicon-cloud                  { &:before { content: "\2601"; } }
-.glyphicon-envelope               { &:before { content: "\2709"; } }
+.glyphicons-envelope               { &:before { content: "\2709"; } }
 .glyphicon-pencil                 { &:before { content: "\270f"; } }
 .glyphicon-glass                  { &:before { content: "\e001"; } }
 .glyphicon-music                  { &:before { content: "\e002"; } }
@@ -48,7 +48,7 @@
 .glyphicon-heart                  { &:before { content: "\e005"; } }
 .glyphicon-star                   { &:before { content: "\e006"; } }
 .glyphicon-star-empty             { &:before { content: "\e007"; } }
-.glyphicon-user                   { &:before { content: "\e008"; } }
+.glyphicons-user                   { &:before { content: "\e004"; } }
 .glyphicon-film                   { &:before { content: "\e009"; } }
 .glyphicon-th-large               { &:before { content: "\e010"; } }
 .glyphicon-th                     { &:before { content: "\e011"; } }
@@ -61,7 +61,7 @@
 .glyphicon-signal                 { &:before { content: "\e018"; } }
 .glyphicon-cog                    { &:before { content: "\e019"; } }
 .glyphicon-trash                  { &:before { content: "\e020"; } }
-.glyphicon-home                   { &:before { content: "\e021"; } }
+.glyphicons-home                   { &:before { content: "\e021"; } }
 .glyphicon-file                   { &:before { content: "\e022"; } }
 .glyphicon-time                   { &:before { content: "\e023"; } }
 .glyphicon-road                   { &:before { content: "\e024"; } }
@@ -196,7 +196,7 @@
 .glyphicon-expand                 { &:before { content: "\e158"; } }
 .glyphicon-collapse-down          { &:before { content: "\e159"; } }
 .glyphicon-collapse-up            { &:before { content: "\e160"; } }
-.glyphicon-log-in                 { &:before { content: "\e161"; } }
+.glyphicons-log-in                 { &:before { content: "\e387"; } }
 .glyphicon-flash                  { &:before { content: "\e162"; } }
 .glyphicon-log-out                { &:before { content: "\e163"; } }
 .glyphicon-new-window             { &:before { content: "\e164"; } }
@@ -290,6 +290,7 @@
 .glyphicon-text-background        { &:before { content: "\e243"; } }
 .glyphicon-object-align-top       { &:before { content: "\e244"; } }
 .glyphicon-object-align-bottom    { &:before { content: "\e245"; } }
+.glyphicons-chat                   { &:before { content: "\e246"; } }
 .glyphicon-object-align-horizontal{ &:before { content: "\e246"; } }
 .glyphicon-object-align-left      { &:before { content: "\e247"; } }
 .glyphicon-object-align-vertical  { &:before { content: "\e248"; } }
@@ -305,3 +306,4 @@
 .glyphicon-menu-right             { &:before { content: "\e258"; } }
 .glyphicon-menu-down              { &:before { content: "\e259"; } }
 .glyphicon-menu-up                { &:before { content: "\e260"; } }
+.glyphicons-gamepad                { &:before { content: "\e322"; } }

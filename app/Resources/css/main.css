@@ -316,8 +316,8 @@ th {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../fonts/glyphicons-halflings-regular.eot");
-  src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+  src: url("../fonts/glyphicons-regular.eot");
+  src: url("../fonts/glyphicons-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-regular.woff2") format("woff2"), url("../fonts/glyphicons-regular.woff") format("woff"), url("../fonts/glyphicons-regular.ttf") format("truetype"), url("../fonts/glyphicons-regular.svg#glyphiconsregular") format("svg");
 }
 
 .glyphicon {
@@ -353,7 +353,7 @@ th {
   content: "\2601";
 }
 
-.glyphicon-envelope:before {
+.glyphicons-envelope:before {
   content: "\2709";
 }
 
@@ -385,8 +385,8 @@ th {
   content: "\e007";
 }
 
-.glyphicon-user:before {
-  content: "\e008";
+.glyphicons-user:before {
+  content: "\e004";
 }
 
 .glyphicon-film:before {
@@ -437,7 +437,7 @@ th {
   content: "\e020";
 }
 
-.glyphicon-home:before {
+.glyphicons-home:before {
   content: "\e021";
 }
 
@@ -977,8 +977,8 @@ th {
   content: "\e160";
 }
 
-.glyphicon-log-in:before {
-  content: "\e161";
+.glyphicons-log-in:before {
+  content: "\e387";
 }
 
 .glyphicon-flash:before {
@@ -1321,6 +1321,10 @@ th {
   content: "\e245";
 }
 
+.glyphicons-chat:before {
+  content: "\e246";
+}
+
 .glyphicon-object-align-horizontal:before {
   content: "\e246";
 }
@@ -1379,6 +1383,10 @@ th {
 
 .glyphicon-menu-up:before {
   content: "\e260";
+}
+
+.glyphicons-gamepad:before {
+  content: "\e322";
 }
 
 * {

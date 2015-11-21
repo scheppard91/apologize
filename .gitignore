@@ -16,6 +16,6 @@
 /src/.htaccess
 /web/.htaccess
 /.sass-cache/
-
+/**/cache/
 # Npm
 /node_modules/

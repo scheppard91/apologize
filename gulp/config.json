@@ -1,0 +1,11 @@
+{
+  "bundles" : [
+    "IndexBundle"
+  ],
+  "page" : [
+    {
+      "name" : "index",
+      "bundleName" : "IndexBundle"
+    }
+  ]
+}

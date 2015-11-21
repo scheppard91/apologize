@@ -2,30 +2,47 @@
 
 {% block body %}
     <div id="header">
-        <nav class="navbar navbar">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href="#">Apologize</a>
                 </div>
-                <div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
 
                         {#accueil/presentation/qui somme nous/equipe/#}
-                        <li><a href="#">{{ 'index.nav.home'|trans }}</a></li>
+                        <li {% if pageName == "index" %} class="active" {% endif %}>
+                            <a href="#"><span class="glyphicon glyphicons-home"></span> {{ 'index.nav.home'|trans }}</a>
+                        </li>
 
                         {#nos jeux/serveur/#}
-                        <li><a href="#">Page 2</a></li>
+                        <li {% if pageName == "game" %} class="active" {% endif %}>
+                            <a href="#"><span class="glyphicon glyphicons-gamepad"></span> {{ 'index.nav.game'|trans }}</a>
+                        </li>
 
                         {#forum#}
-                        <li><a href="#">Page 3</a></li>
+                        <li {% if pageName == "forum" %} class="active" {% endif %}>
+                            <a href="#"><span class="glyphicon glyphicons-chat"></span> {{ 'index.nav.forum'|trans }}</a>
+                        </li>
 
                         {#contact#}
-                        <li><a href="#">Page 4</a></li>
+                        <li {% if pageName == "contact" %} class="active" {% endif %}>
+                            <a href="#"><span class="glyphicon glyphicons-envelope"></span> {{ 'index.nav.contact'|trans }}</a>
+                        </li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
+                        <li>
+                            <a href="#"><span class="glyphicon glyphicons-user"></span> Sign Up</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="glyphicon glyphicons-log-in"></span> Login</a>
+                        </li>
                     </ul>
                 </div>
             </div>
