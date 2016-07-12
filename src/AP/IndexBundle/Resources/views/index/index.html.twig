@@ -1,0 +1,36 @@
+{% extends 'APIndexBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href={{ asset('resources/index/index.css') }}>
+{% endblock %}
+
+{% block title %}Apologize{% endblock %}
+
+{% block mainbody %}
+    <div id="header">
+        <!--<div>
+            <h1>Découvrez une nouvelle façon de jouer</h1>
+        </div>-->
+        <div id="slider">
+            <figure>
+                <img src="./resources/img/sliderDivision.jpg" alt="ts3">
+                <img src="./resources/img/sliderArk.jpg" alt="ts3">
+                <img src="./resources/img/sliderRainbowSix.png" alt="ts3">
+                <img src="./resources/img/sliderHOTS.jpg" alt="ts3">
+            </figure>
+        </div>
+    </div>
+    <section>
+        <div class="container">
+            <h1>Bienvenue sur le site web de la communauté Apologize.</h1>
+            <p>
+                L'objectif est de rassembler des joueurs sympathiques souhaitant jouer dans la bonne humeur.
+            </p>
+            <a href="ts3server://apologize.ovh"><img src="./resources/img/teamspeak3.png" alt="ts3" /></a>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="./resources/index/index.js"></script>
+{% endblock %}

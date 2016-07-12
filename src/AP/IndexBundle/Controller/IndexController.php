@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     /**
      * @Route("/")
-     * @Template("APIndexBundle:Index:index.html.twig")
+     * @Template("APIndexBundle:index:index.html.twig")
      */
     public function indexAction()
     {

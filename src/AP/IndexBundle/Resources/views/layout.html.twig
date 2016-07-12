@@ -1,8 +1,8 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<div id="scroll-animate">
-    <div id="scroll-animate-main">
+<div>
+    <div>
         <header>
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
@@ -17,25 +17,24 @@
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-
                             {#accueil/presentation/qui somme nous/equipe/#}
                             <li {% if pageName == "index" %} class="active" {% endif %}>
-                                <a href="#"><span class="glyphicon glyphicons-home"></span> {{ 'index.nav.home'|trans }}</a>
+                                <a href="#"><i class="fa fa-home" aria-hidden="true"></i> {{ 'index.nav.home'|trans }}</a>
                             </li>
 
                             {#nos jeux/serveur/#}
                             <li {% if pageName == "game" %} class="active" {% endif %}>
-                                <a href="#"><span class="glyphicon glyphicons-gamepad"></span> {{ 'index.nav.game'|trans }}</a>
+                                <a href="#"><i class="fa fa-gamepad" aria-hidden="true"></i> {{ 'index.nav.game'|trans }}</a>
                             </li>
 
                             {#forum#}
                             <li {% if pageName == "forum" %} class="active" {% endif %}>
-                                <a href="#"><span class="glyphicon glyphicons-chat"></span> {{ 'index.nav.forum'|trans }}</a>
+                                <a href="#"><i class="fa fa-comment" aria-hidden="true"></i> {{ 'index.nav.forum'|trans }}</a>
                             </li>
 
                             {#contact#}
                             <li {% if pageName == "contact" %} class="active" {% endif %}>
-                                <a href="#"><span class="glyphicon glyphicons-envelope"></span> {{ 'index.nav.contact'|trans }}</a>
+                                <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> {{ 'index.nav.contact'|trans }}</a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
@@ -50,13 +49,8 @@
                 </div>
             </nav>
         </header>
-        <div class="wrapper-parallax">
+        <div>
             {% block mainbody %}{% endblock %}
-            <footer>
-                <div class="container">
-                    <a class="navbar-brand" href="#">Apologize</a>
-                </div>
-            </footer>
         </div>
     </div>
 </div>

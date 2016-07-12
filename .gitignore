@@ -11,6 +11,7 @@
 /web/bundles/
 /.idea
 /Capfile
+/webpack/
 /app/config/deploy.rb
 /app/.htaccess
 /src/.htaccess
