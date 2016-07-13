@@ -40,7 +40,7 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel',
                 include: root,
-                exclude: /node_modules|libs/
+                exclude: /node_modules|libs/,
             },
             {
                 test: /\.(svg|woff2?|eot|ttf)(\?.*)?$/,

@@ -24,4 +24,3 @@ for (var i=0;i<allResources.length;i++) {
         console.log('done');
     });
 }
-//process.exit()
