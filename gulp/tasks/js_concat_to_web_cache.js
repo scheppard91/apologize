@@ -3,41 +3,59 @@
  */
 
 var gulp   = require('gulp');
-var config = require('../config.json');
 var fs     = require("fs");
 var concat = require('gulp-concat');
+var merge  = require('gulp-merge');
 
 //concat js
 gulp.task('js_concat_to_web_cache', function() {
 
-    return config.page.forEach(function(page){
-        if( fs.existsSync("./src/AP/"+page.bundleName+"/Resources/js/bundle.js") &&
-            fs.existsSync("./src/AP/"+page.bundleName+"/Resources/js/"+page.name+"/page.js")) {
-            gulp.src(["./app/Resources/js/main.js",
-                    "./src/AP/"+page.bundleName+"/Resources/js/bundle.js",
-                    "./src/AP/"+page.bundleName+"/Resources/js/"+page.name+"/page.js"]
-                )
-                .pipe(concat(""+page.name+".js"))
-                .pipe(gulp.dest("./web/js/cache/"));
+    var stream = [];
+    var bundle = fs.readdirSync('./src/AP');
+    var pages = [];
+    for (var i = 0; i < bundle.length; i++) {
+        var bundlePage = fs.readdirSync('./src/AP/' + bundle[i] + '/Resources/views/');
+        for (var y=0;y<bundlePage.length;y++)
+        {
+            if(bundlePage[y].lastIndexOf(".twig")!=-1)
+            {
+                bundlePage.splice(y, 1);y--;
+            }
+        }
+        for (var y = 0; y < bundlePage.length; y++) {
+            bundlePage[y] = [bundle[i],bundlePage[y]];
+        }
+        pages = pages.concat(bundlePage)
+        console.log('js_concat_to_web_cache')
+    }
 
-        } else if(fs.existsSync("./src/AP/"+page.bundleName+"/Resources/js/bundle.js")){
-            gulp.src(["./app/Resources/js/main.js",
-                    "./src/AP/"+page.bundleName+"/Resources/js/bundle.js"]
+    for (var i = 0; i < pages.length; i++) {
+        if( fs.existsSync("./src/AP/"+pages[i][0]+"/Resources/js/cache/bundle.js") &&
+            fs.existsSync("./src/AP/"+pages[i][0]+"/Resources/js/cache/"+pages[i][1]+"/page.js")) {
+            stream[i] = gulp.src(["./app/Resources/js/cache/main.js",
+                    "./src/AP/"+pages[i][0]+"/Resources/js/cache/bundle.js",
+                    "./src/AP/"+pages[i][0]+"/Resources/js/cache/"+pages[i][1]+"/page.js"]
                 )
-                .pipe(concat(""+page.name+".js"))
-                .pipe(gulp.dest("./web/js/cache/"));
+                .pipe(concat(""+pages[i][1]+".js"))
+                .pipe(gulp.dest("./web/resources/"+pages[i][1]+"/cache/"));
 
-        } else if(fs.existsSync("./src/AP/"+page.bundleName+"/Resources/js/"+page.name+"/page.js")){
-            gulp.src(["./app/Resources/js/main.js",
-                    "./src/AP/"+page.bundleName+"/Resources/js/"+page.name+"/page.js"]
-                )
-                .pipe(concat(""+page.name+".js"))
-                .pipe(gulp.dest("./web/js/cache/"));
+        } else if(fs.existsSync("./src/AP/"+pages[i][0]+"/Resources/js/cache/bundle.js")){
+            stream[i] = gulp.src(["./app/Resources/js/cache/main.js",
+                    "./src/AP/"+pages[i][0]+"/Resources/js/cache/bundle.js"])
+                .pipe(concat(""+pages[i][1]+".js"))
+                .pipe(gulp.dest("./web/resources/"+pages[i][1]+"/cache/"));
+
+        } else if(fs.existsSync("./src/AP/"+pages[i][0]+"/Resources/js/cache/"+pages[i][1]+"/page.js")){
+            stream[i] = gulp.src(["./app/Resources/js/cache/main.js",
+                    "./src/AP/"+pages[i][0]+"/Resources/js/cache/"+pages[i][1]+"/page.js"])
+                .pipe(concat(""+pages[i][1]+".js"))
+                .pipe(gulp.dest("./web/resources/"+pages[i][1]+"/cache/"));
 
         } else {
-            gulp.src("./app/Resources/js/main.js")
-                .pipe(concat(""+page.name+".js"))
-                .pipe(gulp.dest("./web/js/cache/"));
+            stream[i] = gulp.src("./app/Resources/js/cache/main.js")
+                .pipe(concat(""+pages[i][1]+".js"))
+                .pipe(gulp.dest("./web/resources/"+pages[i][1]+"/cache/"));
         }
-    });
+    }
+    return merge(stream);
 });

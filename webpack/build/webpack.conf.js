@@ -11,8 +11,8 @@ module.exports = {
     entry: conf.entry,
     output: conf.output,
     resolve: {
-        extensions: ['', '.js', '.vue', '.coffee', '.css', '.scss'],
-        fallback: [path.join(__dirname, '../node_modules')]
+        //extensions: ['', '.js', '.vue', '.coffee', '.css', '.scss'],
+        //fallback: [path.join(__dirname, '../node_modules')]
     },
     module: {
         /*preLoaders: [
@@ -39,8 +39,8 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel',
-                include: root,
-                exclude: /node_modules|libs/,
+                //include: root,
+                //exclude: /node_modules|libs/,
             },
             {
                 test: /\.(svg|woff2?|eot|ttf)(\?.*)?$/,
@@ -62,22 +62,22 @@ module.exports = {
     },
     plugins: [
         extractSASS,
-        new webpack.optimize.UglifyJsPlugin({
+        /*new webpack.optimize.UglifyJsPlugin({
             comments: false,
             compress: {
                 warnings: false,
             }
         }),
-        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),*/
         new WebpackShellPlugin({
             onBuildEnd: ['node ./webpack/build/endBuild.js && mv ./web/fonts ./web/resources/fonts']
         })
     ],
-    eslint: {
+    /*eslint: {
         configFile: path.resolve(root, './.eslintrc'),
         formatter: require('eslint-friendly-formatter')
     },
     postcss: function () {
         return [autoprefixer({browsers: conf.support})];
-    }
+    }*/
 }

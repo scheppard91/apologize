@@ -1,4 +1,3 @@
-//require('./jquery/jquery') include with webpack endBuild
 require('./bootstrap/affix')
 require('./bootstrap/alert')
 require('./bootstrap/button')

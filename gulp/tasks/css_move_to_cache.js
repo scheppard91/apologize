@@ -2,22 +2,21 @@ var gulp   = require('gulp');
 var merge  = require('gulp-merge');
 var fs     = require('fs');
 
-
-// move js to cache
-gulp.task('js_move_to_cache', function() {
+// move css to cache
+gulp.task('css_move_to_cache', function () {
     var stream =[];
     //main
-    var stream1 = gulp.src(['./app/Resources/js/*.js','!./app/Resources/js/_*.js'])
-        .pipe(gulp.dest('./app/Resources/js/cache/'));
+    var stream1 = gulp.src('./app/Resources/css/*.css')
+        .pipe(gulp.dest('./app/Resources/css/cache/'));
     
-    //bundle IndexBundle
+   //bundle IndexBundle
     var bundle = fs.readdirSync('./src/AP');
     var stream2 = bundle.forEach(function(name){
-        gulp.src("./src/AP/"+name+"/Resources/js/*.js")
-            .pipe(gulp.dest("./src/AP/"+name+"/Resources/js/cache/"));
+        gulp.src("./src/AP/"+name+"/Resources/css/*.css")
+            .pipe(gulp.dest("./src/AP/"+name+"/Resources/css/cache/"))
     });
 
-    //page
+    //index
     var pages = [];
     for (var i = 0; i < bundle.length; i++) {
         var bundlePage = fs.readdirSync('./src/AP/' + bundle[i] + '/Resources/views/');
@@ -35,13 +34,13 @@ gulp.task('js_move_to_cache', function() {
     }
 
     for (var i = 0; i < pages.length; i++) {
-        stream[i] = gulp.src("./src/AP/"+pages[i][0]+"/Resources/js/"+pages[i][1]+"/*.js")
-            .pipe(gulp.dest("./src/AP/"+pages[i][0]+"/Resources/js/cache/"+pages[i][1]));
+        stream[i] = gulp.src("./src/AP/"+pages[i][0]+"/Resources/css/"+pages[i][1]+"/*.css")
+            .pipe(gulp.dest("./src/AP/"+pages[i][0]+"/Resources/css/cache/"+pages[i][1]));
     }
-    
+
     return merge(stream1,stream2,stream);
 });
 
-//   app/resource/js/cache
-//      src/[bundle]/resource/js/cache
-//          src/[bundle]/resource/js/cache/[page]
+//   app/resource/css/cache
+//      src/[bundle]/resource/css/cache
+//          src/[bundle]/resource/css/cache/[page]

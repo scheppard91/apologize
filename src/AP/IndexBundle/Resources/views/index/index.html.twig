@@ -1,7 +1,7 @@
 {% extends 'APIndexBundle::layout.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href={{ asset('resources/index/index.css') }}>
+    <link rel="stylesheet" type="text/css" href={{ asset('resources/index/index.css')}}>
     <link rel="stylesheet" type="text/css" href="./resources/index/sliderCSS.css">
     <link rel="stylesheet" type="text/css" href="./resources/index/skin.css">
 {% endblock %}
@@ -80,8 +80,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="./resources/index/index.js"></script>
-    <script type="text/javascript" src="./resources/index/TweenMax.js"></script>
-    <script type="text/javascript" src="./resources/index/js1.js"></script>
-    <script type="text/javascript" src="./resources/index/js2.js"></script>
+    <script src='./resources/index/index.js' type="text/javascript"></script>
 {% endblock %}

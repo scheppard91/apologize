@@ -12,7 +12,7 @@ gulp.task("default", function () {
 
     runSequence(
         'sass_to_css',
-        /*'css_move_to_cache',*/
+        'css_move_to_cache',
         'css_concat',
         'css_concat_to_web_cache',
         'css_compress',
