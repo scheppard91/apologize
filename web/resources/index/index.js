@@ -21989,9 +21989,8 @@ function lsShowNotice(lsobj,issue,ver){
 					if( $('link[href="'+skinStyle+'"]').length ){
 
 						// ls.d.aU('Skin "'+ls.o.skin+'" is already loaded.');
-
+						
 						curSkin = $('link[href="'+skinStyle+'"]');
-
 						if( !ls.g.loaded ){
 
 							ls.g.loaded = true;

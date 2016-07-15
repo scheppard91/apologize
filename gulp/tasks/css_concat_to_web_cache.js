@@ -35,26 +35,26 @@ gulp.task('css_concat_to_web_cache', function() {
                 "./src/AP/"+pages[i][0]+"/Resources/css/cache/bundle.css",
                 "./src/AP/"+pages[i][0]+"/Resources/css/cache/"+pages[i][1]+"/page.css"]
             )
-                .pipe(concatCss(""+pages[i][1]+".css"))
+                .pipe(concatCss(""+pages[i][1]+".css",{rebaseUrls:false}))
                 .pipe(gulp.dest("./web/resources/"+pages[i][1]+"/cache/"));
 
         } else if(fs.existsSync("./src/AP/"+pages[i][0]+"/Resources/css/cache/bundle.css")){
             stream[i] = gulp.src(["./app/Resources/css/cache/main.css",
                 "./src/AP/"+pages[i][0]+"/Resources/css/cache/bundle.css"]
             )
-                .pipe(concatCss(""+pages[i][1]+".css"))
+                .pipe(concatCss(""+pages[i][1]+".css",{rebaseUrls:false}))
                 .pipe(gulp.dest("./web/resources/"+pages[i][1]+"/cache/"));
 
         } else if(fs.existsSync("./src/AP/"+pages[i][0]+"/Resources/css/cache/"+pages[i][1]+"/page.css")){
             stream[i] = gulp.src(["./app/Resources/css/cache/main.css",
                 "./src/AP/"+pages[i][0]+"/Resources/css/cache/"+pages[i][1]+"/page.css"]
             )
-                .pipe(concatCss(""+pages[i][1]+".css"))
+                .pipe(concatCss(""+pages[i][1]+".css",{rebaseUrls:false}))
                 .pipe(gulp.dest("./web/resources/"+pages[i][1]+"/cache/"));
             console.log("message")
         } else {
             stream[i] = gulp.src("./app/Resources/css/cache/main.css")
-                .pipe(concatCss(""+pages[i][1]+".css"))
+                .pipe(concatCss(""+pages[i][1]+".css",{rebaseUrls:false}))
                 .pipe(gulp.dest("./web/resources/"+pages[i][1]+"/cache/"));
         }
     }
