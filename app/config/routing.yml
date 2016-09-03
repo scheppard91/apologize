@@ -1,8 +1,47 @@
-ap_index:
-    resource: "@APIndexBundle/Controller/"
+comment:
+    resource: "@CommentBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+blog:
+    resource: "@BlogBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+forum:
+    resource: "@ForumBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+game:
+    resource: "@GameBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+teamspeack:
+    resource: "@TeamspeackBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+presentation:
+    resource: "@PresentationBundle/Controller/"
     type:     annotation
     prefix:   /
 
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }

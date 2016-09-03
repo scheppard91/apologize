@@ -1,0 +1,74 @@
+{% extends 'PresentationBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href={{ asset('bundles/PresentationBundle/index/index.css')}}>
+{% endblock %}
+
+{% block title %}Apologize{% endblock %}
+
+{% block mainbody %}
+    <div id="header">
+        <!--<div>
+            <h1>Découvrez une nouvelle façon de jouer</h1>
+        </div>-->
+        <div class="ls-wp-fullwidth-container" style="height:593px;">
+            <div class="ls-wp-fullwidth-helper">
+                <div id="layerslider_13" class="ls-wp-container" style="width:100%;height:593px;max-width:1920px;margin:0 auto;margin-bottom: 0px;">
+                    <div class="ls-slide" data-ls="transition2d:5;">
+                        <img data-src={{ asset('bundles/PresentationBundle/index/images/divisionSlider.png')}} class="ls-bg" alt="" />
+                        <img class="ls-l" style="top:-100px;left:-360px;white-space: nowrap;"  data-ls="ooffsetxin:0;delayin:300;offsetyin:-250;easingin:easeOutBack;offsetyout:-250;easingout:easeInExpo;parallaxlevel:-1;" data-src={{ asset('bundles/PresentationBundle/index/images/smoke-division.png')}} alt="">
+                        <img class="ls-l" style="top:155px;left:80px;white-space: nowrap;"  data-ls="offsetxin:-50;delayin:600;offsetyin:50;easingin:easeOutBack;offsetxout:-50;easingout:easeInExpo;;parallaxlevel:1;" data-src={{ asset('bundles/PresentationBundle/index/images/division1.png')}} alt="">
+                        <img class="ls-l" style="top:320px;left:-350px;white-space: nowrap;" data-ls="offsetxin:0;delayin:800;offsetyin:100;easingin:easeOutBack;offsetxout:0;offsetyout:100;easingout:easeInExpo;parallaxlevel:-2;" data-src="{{ asset('bundles/PresentationBundle/index/images/effectExplosion.png')}}" alt="">
+                        <img class="ls-l" style="top:100px;left:825px;white-space: nowrap;" data-ls="offsetxin:50;delayin:1000;offsetyin:50;easingin:easeOutBack;offsetxout:50;easingout:easeInExpo;parallaxlevel:2;" data-src="{{ asset('bundles/PresentationBundle/index/images/division2.png')}}" alt="">
+                        <img class="ls-l" style="top:30px;left:450px;white-space: nowrap;" data-ls="offsetxin:0;offsetyin:50;durationin:1500;delayin:400;easingin:easeOutExpo;offsetxout:0;offsetyout:-50;easingout:easeInExpo;"  data-src="{{ asset('bundles/PresentationBundle/index/images/Logo_the_division.png')}}" alt="">
+                    </div>
+                    <div class="ls-slide" data-ls="transition2d:5;">
+                        <img data-src={{ asset('bundles/PresentationBundle/index/images/arkSlider.png')}} class="ls-bg" alt="" />
+                        <img class="ls-l" style="top:0px;left:1030px;white-space: nowrap;" data-ls="offsetxin:-60;durationin:1400;delayin:100;easingin:easeOutExpo;offsetxout:60;durationout:500;easingout:easeInExpo;" data-src="data-src="{{ asset('bundles/PresentationBundle/index/images/arkLogo.png')}} alt="">
+                        <img class="ls-l" style="top:15px;left:55px;white-space: nowrap;" data-ls="offsetxin:0;offsetyin:-50;offsetxout:0;offsetyout:50;durationin:1500;easingin:easeOutExpo;easingout:easeInExpo;" data-src="/resources/img/arkBonus.png" alt="">
+                        <img class="ls-l" style="top:400px;left:0px;white-space: nowrap;" data-ls="durationin:1500;easingin:easeOutExpo;durationout:500;easingout:easeInExpo;parallaxlevel:-1;" data-src="/resources/img/mammoth.png" alt="">
+                        <img class="ls-l" style="top:15px;left:350px;white-space: nowrap;" data-ls="durationin:1500;easingin:easeOutExpo;durationout:500;easingout:easeInExpo;parallaxlevel:-3;" data-src="/resources/img/arrow-target.png" alt="">
+                        <img class="ls-l" style="top:0px;left:900px;white-space: nowrap;" data-ls="durationin:1500;easingin:easeOutExpo;durationout:500;easingout:easeInExpo;parallaxlevel:1;" data-src="/resources/img/arkFlyDino.png" alt="">
+                        <img class="ls-l" style="top:-250px;left:-300px;white-space: nowrap;" data-ls="offsetxin:-60;durationin:1400;delayin:100;easingin:easeOutExpo;offsetxout:60;durationout:500;easingout:easeInExpo;parallaxlevel:3;" data-src="./resources/img/arkPlay.png" alt="">
+                        <img class="ls-l" style="top:450px;left:900px;white-space: nowrap;" data-ls="offsetxin:-60;durationin:1400;delayin:100;easingin:easeOutExpo;offsetxout:60;durationout:500;easingout:easeInExpo;parallaxlevel:-2;" data-src="http://www.dododex.com/media/creature/raptor.png" alt="">
+                    </div>
+                    <div class="ls-slide" data-ls="transition2d:5;">
+                        <img data-src="./resources/img/sliderOverwatch.jpg" class="ls-bg" alt="" />
+                        <img class="ls-l" style="top:0px;left:1030px;white-space: nowrap;" data-ls="offsetxin:50;offsetxout:50;durationin:1400;delayin:100;easingin:easeOutExpo;offsetxout:60;durationout:500;easingout:easeInExpo;" data-src="/resources/img/PressSiteLogoWhite04(1).png" alt="">
+                        <img class="ls-l" style="top:0px;left:150px;white-space: nowrap;" data-ls="offsetxin:-50;offsetyin:50;offsetxout:50;offsetyout:-50;durationin:1500;easingin:easeOutExpo;easingout:easeInExpo;parallaxlevel:1;" data-src="./resources/img/phara.png" alt="">
+                        <img class="ls-l" style="top:150px;left:0px;white-space: nowrap;" data-ls="offsetxin:-50;offsetyin:50;offsetxout:-50;offsetyout:50;durationin:1500;easingin:easeOutExpo;easingout:easeInExpo;parallaxlevel:-2;" data-src="./resources/img/overwatch3.png" alt="">
+                        <img class="ls-l" style="top:20px;left:580px;white-space: nowrap;" data-ls="offsetxin:50;offsetyin:-50;offsetxout:50;offsetyout:-50;durationin:1500;easingin:easeOutExpo;easingout:easeInExpo;parallaxlevel:-1;" data-src="./resources/img/tracer.png" alt="">
+                        <img class="ls-l" style="top:150px;left:900px;white-space: nowrap;" data-ls="offsetxin:50;offsetyin:50;offsetxout:50;offsetyout:50;durationin:1500;easingin:easeOutExpo;easingout:easeInExpo;parallaxlevel:-2;" data-src="./resources/img/Soldier76.png" alt="">
+                        <img class="ls-l" style="top:215px;left:300px;white-space: nowrap;" data-ls="offsetxin:0;offsetyin:50;offsetxout:0;offsetyout:50;durationin:1500;easingin:easeOutExpo;easingout:easeInExpo;parallaxlevel:2;" data-src="./resources/img/full-portrait.png" alt="">
+                    </div>
+                    <div class="ls-slide" data-ls="transition2d:5;">
+                        <img data-src="./resources/img/rb6s.jpg" class="ls-bg" alt="" />
+                        <img class="ls-l" style="top:15px;left:50px;white-space: nowrap;" data-ls="offsetxin:-60;durationin:1400;easingin:easeOutExpo;offsetxout:-50;durationout:500;easingout:easeInExpo;" data-src="./resources/img/rb6Logo.png" alt="">
+                        <img class="ls-l" style="top:250px;left:1000px;white-space: nowrap;" data-ls="offsetxin:0;offsetyin:50;durationin:1400;delayin:550;easingin:easeOutExpo;offsetxout:0;offsetyout:60;durationout:500;easingout:easeInExpo;parallaxlevel:1;" data-src="./resources/img/rb6Termite.png" alt="">
+                        <img class="ls-l" style="top:250px;left:0px;white-space: nowrap;" data-ls="offsetxin:0;offsetyin:50;durationin:1400;delayin:650;easingin:easeOutExpo;offsetxout:0;offsetyout:60;durationout:500;easingout:easeInExpo;parallaxlevel:1;" data-src="http://static9.cdn.ubi.com/resource/en-CA/game/rainbow6/siege/R6-operators-list-sledge.png" alt="">
+                        <img class="ls-l" style="top:200px;left:210px;white-space: nowrap;" data-ls="offsetxin:0;offsetyin:50;durationin:1400;delayin:350;easingin:easeOutExpo;offsetxout:0;offsetyout:60;durationout:500;easingout:easeInExpo;parallaxlevel:2;" data-src="./resources/img/rb6IQ.png" alt="">
+                        <img class="ls-l" style="top:100px;left:650px;white-space: nowrap;" data-ls="offsetxin:0;offsetyin:50;durationin:1400;delayin:250;easingin:easeOutExpo;offsetxout:0;offsetyout:60;durationout:500;easingout:easeInExpo;parallaxlevel:2;" data-src="./resources/img/rb6Buck.png" alt="">
+                        <img class="ls-l" style="top:50px;left:355px;white-space: nowrap;" data-ls="offsetxin:0;offsetyin:50;durationin:1400;easingin:easeOutExpo;offsetxout:0;offsetyout:60;durationout:500;easingout:easeInExpo;parallaxlevel:3;" data-src="./resources/img/rb6Blitz.png" alt="">
+                    </div>
+                    <div class="ls-slide" data-ls="transition2d:5;">
+                        <img data-src="./resources/img/theHunter.jpg" class="ls-bg" alt="" />
+                        <img class="ls-l" style="top:45px;left:200px;white-space: nowrap;" data-ls="offsetxin:-60;durationin:1400;delayin:100;easingin:easeOutExpo;offsetxout:60;durationout:500;easingout:easeInExpo;" data-src="./resources/img/logoTheHunter.png" alt="">
+                        <img class="ls-l" style="top:150px;left:800px;white-space: nowrap;" data-ls="offsetxin:0;offsetyin:-50;offsetxout:0;offsetyout:50;durationin:1500;easingin:easeOutExpo;easingout:easeInExpo;parallaxlevel:-2;" data-src="http://d1io4fvbkweccz.cloudfront.net/images/layerslider/La-Grange/oiseau.png" alt="">
+                        <img class="ls-l" style="top:465px;left:200px;white-space: nowrap;" data-ls="durationin:1500;easingin:easeOutExpo;durationout:500;easingout:easeInExpo;parallaxlevel:1;" data-src="http://d1io4fvbkweccz.cloudfront.net/images/layerslider/La-Grange/loup.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="container">
+            <h1>Bienvenue sur le site web de la communauté Apologize.</h1>
+            <p>L'objectif est de rassembler des joueurs sympathiques souhaitant jouer dans la bonne humeur.</p>
+            <a href="ts3server://apologize.ovh"><img src={{ asset('bundles/PresentationBundle/index/images/teamspeak3.png')}} alt="ts3" /></a>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src={{ asset('bundles/PresentationBundle/index/index.js')}} type="text/javascript"></script>
+{% endblock %}

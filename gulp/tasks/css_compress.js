@@ -5,24 +5,35 @@
 var gulp      = require('gulp');
 var fs        = require("fs");
 var minifyCss = require('gulp-minify-css');
-var merge     = require('gulp-merge');
+var merge     = require('merge-stream');
+var vm        = require('vm');
 
+// import tool.js
+eval(fs.readFileSync(__dirname + "/tool.js")+'');
+
+// compress css
 gulp.task('css_compress', function() {
-    var stream = [];
-    var pages = fs.readdirSync('./web/resources');
 
-    for (var i = 0; i < pages.length; i++) {
-        if(pages[i] == "img" || pages[i] == "fonts") {
-            pages.splice(i, 1);i--;
-        }
-    }
-    
-    for (var i = 0; i < pages.length; i++) {
-        stream[i] = gulp.src("./web/resources/"+pages[i]+"/cache/*.css")
-            //.pipe(minifyCss())
-            .pipe(gulp.dest("./web/resources/"+pages[i]+"/"))
-        console.log('css_compress');
-    }
-    
+    // stream for procedural execution
+    var stream = [];
+
+    // list of ressource bundles
+    var pagesBundle = getRessourceBundleList();
+
+    //compress css for all bundle
+    pagesBundle.forEach(function(pageBundle){
+
+        //return ressource page
+        var pages = getRessourcePageList(pageBundle);
+
+        // compress css
+        pages.forEach(function(page){
+            stream.push(gulp.src("../web/bundles/"+pageBundle+"/"+page+"/cache/*.css")
+            //  .pipe(minifyCss())
+                .pipe(gulp.dest("../web/bundles/"+pageBundle+"/"+page+"/")));
+        })
+    });
+
+    //merge all stream
     return merge(stream);
 });

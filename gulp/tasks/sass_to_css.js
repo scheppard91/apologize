@@ -1,56 +1,46 @@
 /**
  * Created by julienbouysset on 19/11/15.
  */
+var gulp  = require('gulp');
+var merge = require('merge-stream');
+var sass  = require('gulp-sass');
+var fs    = require('fs');
+var vm    = require('vm');
 
-var gulp   = require('gulp');
-var merge  = require('gulp-merge');
-var sass   = require('gulp-ruby-sass');
-var fs     = require('fs');
-
+// import tool.js
+eval(fs.readFileSync(__dirname + "/tool.js")+'');
 
 // convert scss to css
 gulp.task('sass_to_css', function () {
-    var stream =[];
+
+    // stream for procedural execution
+    var stream = [];
+
+    // list of bundles
+    var bundle = getBundleList();
+
+    // list of pages
+    var pages = getPageList(bundle);
     
-    //main
-    var stream1 = sass('./app/Resources/scss/*.scss')
-        .pipe(gulp.dest('./app/Resources/css/cache/'));
-    
-    //bundle IndexBundle
-    var bundle = fs.readdirSync('./src/AP');
-    var stream2 = bundle.forEach(function(name){
-        sass("./src/AP/"+name+"/Resources/scss/*.scss")
-            .pipe(gulp.dest("./src/AP/"+name+"/Resources/css/cache/"))
-        console.log("sass.to.css");
+    //convert main scss to css in cache
+    stream.push(gulp.src('../app/Resources/scss/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('../app/Resources/css/cache/')));
+
+    //convert bundle scss to css in cache
+    bundle.forEach(function(name){
+        stream.push(gulp.src("../src/"+name+"/Resources/scss/*.scss")
+            .pipe(sass().on('error', sass.logError))
+            .pipe(gulp.dest("../src/"+name+"/Resources/css/cache/")))
     });
 
-    //index
-    var pages = [];
-    for (var i = 0; i < bundle.length; i++) {
-        var bundlePage = fs.readdirSync('./src/AP/' + bundle[i] + '/Resources/views/');
-        for (var y=0;y<bundlePage.length;y++)
-        {
-            if(bundlePage[y].lastIndexOf(".twig")!=-1)
-            {
-                bundlePage.splice(y, 1);y--;
-            }
-        }
-        for (var y = 0; y < bundlePage.length; y++) {
-            bundlePage[y] = [bundle[i],bundlePage[y]];
-        }
-        pages = pages.concat(bundlePage)
-        console.log("sass.to.css");
-    }
+    //convert pages scss to css in cache
+    pages.forEach(function(page){
+        stream.push(gulp.src("../src/"+page[0]+"/Resources/scss/"+page[1]+"/*.scss")
+            .pipe(sass().on('error', sass.logError))
+            .pipe(gulp.dest("../src/"+page[0]+"/Resources/css/cache/"+page[1])));
+    });
 
-    for (var i = 0; i < pages.length; i++) {
-        stream[i] = sass("./src/AP/"+pages[i][0]+"/Resources/scss/"+pages[i][1]+"/*.scss")
-            .pipe(gulp.dest("./src/AP/"+pages[i][0]+"/Resources/css/cache/"+pages[i][1]));
-        console.log(pages[i][0] + "===" + pages[i][1]);
-    }
-    
-    return merge(stream1,stream2,stream);
+    //merge all stream
+    return merge(stream);
 });
-
-//   app/resource/css/cache
-//      src/[bundle]/resource/css/cache
-//          src/[bundle]/resource/css/cache/[page]

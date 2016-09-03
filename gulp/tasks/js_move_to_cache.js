@@ -1,47 +1,39 @@
-var gulp   = require('gulp');
-var merge  = require('gulp-merge');
-var fs     = require('fs');
+var gulp  = require('gulp');
+var merge = require('merge-stream');
+var fs    = require('fs');
+var vm    = require('vm');
 
+// import tool.js
+eval(fs.readFileSync(__dirname + "/tool.js")+'');
 
 // move js to cache
 gulp.task('js_move_to_cache', function() {
-    var stream =[];
-    //main
-    var stream1 = gulp.src(['./app/Resources/js/*.js','!./app/Resources/js/_*.js'])
-        .pipe(gulp.dest('./app/Resources/js/cache/'));
-    
-    //bundle IndexBundle
-    var bundle = fs.readdirSync('./src/AP');
-    var stream2 = bundle.forEach(function(name){
-        gulp.src("./src/AP/"+name+"/Resources/js/*.js")
-            .pipe(gulp.dest("./src/AP/"+name+"/Resources/js/cache/"));
+
+    // stream for procedural execution
+    var stream = [];
+
+    // list of bundles
+    var bundle = getBundleList();
+
+    // list of pages
+    var pages = getPageList(bundle);
+
+    //move main js to cache
+    stream.push(gulp.src(['../app/Resources/js/*.js','!../app/Resources/js/_*.js'])
+        .pipe(gulp.dest('../app/Resources/js/cache/')));
+
+    //move bundle js to cache
+    bundle.forEach(function(name){
+        stream.push(gulp.src("../src/"+name+"/Resources/js/*.js")
+            .pipe(gulp.dest("../src/"+name+"/Resources/js/cache/")));
     });
 
-    //page
-    var pages = [];
-    for (var i = 0; i < bundle.length; i++) {
-        var bundlePage = fs.readdirSync('./src/AP/' + bundle[i] + '/Resources/views/');
-        for (var y=0;y<bundlePage.length;y++)
-        {
-            if(bundlePage[y].lastIndexOf(".twig")!=-1)
-            {
-                bundlePage.splice(y, 1);y--;
-            }
-        }
-        for (var y = 0; y < bundlePage.length; y++) {
-            bundlePage[y] = [bundle[i],bundlePage[y]];
-        }
-        pages = pages.concat(bundlePage)
-    }
+    //move page js to cache
+    pages.forEach(function(page){
+        stream.push(gulp.src("../src/"+page[0]+"/Resources/js/"+page[1]+"/*.js")
+            .pipe(gulp.dest("../src/"+page[0]+"/Resources/js/cache/"+page[1])));
+    });
 
-    for (var i = 0; i < pages.length; i++) {
-        stream[i] = gulp.src("./src/AP/"+pages[i][0]+"/Resources/js/"+pages[i][1]+"/*.js")
-            .pipe(gulp.dest("./src/AP/"+pages[i][0]+"/Resources/js/cache/"+pages[i][1]));
-    }
-    
-    return merge(stream1,stream2,stream);
+    //merge all stream
+    return merge(stream);
 });
-
-//   app/resource/js/cache
-//      src/[bundle]/resource/js/cache
-//          src/[bundle]/resource/js/cache/[page]

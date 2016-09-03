@@ -2,40 +2,47 @@
  * Created by julienbouysset on 19/11/15.
  */
 
-var gulp   = require('gulp');
-var config = require('../config.json');
-var del    = require('del');
-var fs     = require("fs");
-var merge  = require('gulp-merge');
+var gulp  = require('gulp');
+var clean = require('gulp-clean');
+var fs    = require("fs");
+var merge = require('merge-stream');
+var vm    = require('vm');
 
+// import tool.js
+eval(fs.readFileSync(__dirname + "/tool.js")+'');
 
 // remove cache dir
 gulp.task('css_remove_cache', function() {
 
+    // stream for procedural execution
+    var stream = [];
+
+    // list of bundles
+    var bundle = getBundleList();
+
     // remove global css cache
-    del([
-        "./app/Resources/css/cache/"
-    ]);
-    
+    stream.push(gulp.src("../app/Resources/css/cache/")
+        .pipe(clean({force: true})));
+
     // remove bundle css cache
-    var bundle = fs.readdirSync('./src/AP');
     bundle.forEach(function(name){
-        del([
-            "./src/AP/"+name+"/Resources/css/cache/"
-        ]);
+        stream.push(gulp.src("../src/"+name+"/Resources/css/cache/")
+            .pipe(clean({force: true})));
     });
 
-    // remove web cache
-    var pages = fs.readdirSync('./web/resources');
-    for (var i = 0; i < pages.length; i++) {
-        if(pages[i] == "img" || pages[i] == "fonts") {
-            pages.splice(i, 1);i--;
-        }
-    }
-    pages.forEach(function(test){
-        del([
-            "./web/resources/"+test+"/cache/"
-        ]);
-        console.log(fs.readdirSync("./web/resources/"+test+"/cache/"))
+    var pagesBundle = getRessourceBundleList();
+
+    //compress css for all bundle
+    pagesBundle.forEach(function(pageBundle) {
+
+        //return ressource page
+        var pages = getRessourcePageList(pageBundle);
+
+        //remove page css cache
+        pages.forEach(function(page){
+            gulp.src("../web/bundles/" + pageBundle +"/"+page+"/cache/")
+                .pipe(clean({force: true}));
+        });
     });
+    return merge(stream);
 });

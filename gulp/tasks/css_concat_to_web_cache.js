@@ -5,60 +5,56 @@
 var gulp      = require('gulp');
 var fs        = require("fs");
 var concatCss = require('gulp-concat-css');
-var merge     = require('gulp-merge');
+var merge     = require('merge-stream');
+var vm        = require('vm');
+
+// import tool.js
+eval(fs.readFileSync(__dirname + "/tool.js")+'');
 
 //concat css
 gulp.task('css_concat_to_web_cache', function() {
+
+    // stream for procedural execution
     var stream = [];
-    var bundle = fs.readdirSync('./src/AP');
-    var pages = [];
-    for (var i = 0; i < bundle.length; i++) {
-        var bundlePage = fs.readdirSync('./src/AP/' + bundle[i] + '/Resources/views/');
-        for (var y=0;y<bundlePage.length;y++)
-        {
-            if(bundlePage[y].lastIndexOf(".twig")!=-1)
-            {
-                bundlePage.splice(y, 1);y--;
-            }
-        }
-        for (var y = 0; y < bundlePage.length; y++) {
-            bundlePage[y] = [bundle[i],bundlePage[y]];
-        }
-        pages = pages.concat(bundlePage)
-        console.log('css_concat_to_web_cache')
-    }
 
-    for (var i = 0; i < pages.length; i++) {
-        if( fs.existsSync("./src/AP/"+pages[i][0]+"/Resources/css/cache/bundle.css") &&
-            fs.existsSync("./src/AP/"+pages[i][0]+"/Resources/css/cache/"+pages[i][1]+"/page.css")) {
-            stream[i] = gulp.src(["./app/Resources/css/cache/main.css",
-                "./src/AP/"+pages[i][0]+"/Resources/css/cache/bundle.css",
-                "./src/AP/"+pages[i][0]+"/Resources/css/cache/"+pages[i][1]+"/page.css"]
-            )
-                .pipe(concatCss(""+pages[i][1]+".css",{rebaseUrls:false}))
-                .pipe(gulp.dest("./web/resources/"+pages[i][1]+"/cache/"));
+    // list of bundles
+    var bundle = getBundleList();
 
-        } else if(fs.existsSync("./src/AP/"+pages[i][0]+"/Resources/css/cache/bundle.css")){
-            stream[i] = gulp.src(["./app/Resources/css/cache/main.css",
-                "./src/AP/"+pages[i][0]+"/Resources/css/cache/bundle.css"]
-            )
-                .pipe(concatCss(""+pages[i][1]+".css",{rebaseUrls:false}))
-                .pipe(gulp.dest("./web/resources/"+pages[i][1]+"/cache/"));
+    // list of pages
+    var pages = getPageList(bundle);
 
-        } else if(fs.existsSync("./src/AP/"+pages[i][0]+"/Resources/css/cache/"+pages[i][1]+"/page.css")){
-            stream[i] = gulp.src(["./app/Resources/css/cache/main.css",
-                "./src/AP/"+pages[i][0]+"/Resources/css/cache/"+pages[i][1]+"/page.css"]
+    //concat all page to web cache
+    pages.forEach(function(page){
+        if( fs.existsSync("../src/"+page[0]+"/Resources/css/cache/bundle.css") &&
+            fs.existsSync("../src/"+page[0]+"/Resources/css/cache/"+page[1]+"/page.css")) {
+            stream.push(gulp.src(["../app/Resources/css/cache/main.css",
+                "../src/"+page[0]+"/Resources/css/cache/bundle.css",
+                "../src/"+page[0]+"/Resources/css/cache/"+page[1]+"/page.css"]
             )
-                .pipe(concatCss(""+pages[i][1]+".css",{rebaseUrls:false}))
-                .pipe(gulp.dest("./web/resources/"+pages[i][1]+"/cache/"));
-            console.log("message")
+                .pipe(concatCss(""+page[1]+".css",{rebaseUrls:false}))
+                .pipe(gulp.dest("../web/bundles/"+page[0]+"/"+page[1]+"/cache/")));
+
+        } else if(fs.existsSync("../src/"+page[0]+"/Resources/css/cache/bundle.css")){
+            stream.push(gulp.src(["../app/Resources/css/cache/main.css",
+                "../src/"+page[0]+"/Resources/css/cache/bundle.css"]
+            )
+                .pipe(concatCss(""+page[1]+".css",{rebaseUrls:false}))
+                .pipe(gulp.dest("../web/bundles/"+page[0]+"/"+page[1]+"/cache/")));
+
+        } else if(fs.existsSync("../src/"+page[0]+"/Resources/css/cache/"+page[1]+"/page.css")){
+            stream.push(gulp.src(["../app/Resources/css/cache/main.css",
+                "../src/"+page[0]+"/Resources/css/cache/"+page[1]+"/page.css"]
+            )
+                .pipe(concatCss(""+page[1]+".css",{rebaseUrls:false}))
+                .pipe(gulp.dest("../web/bundles/"+page[0]+"/"+page[1]+"/cache/")));
         } else {
-            stream[i] = gulp.src("./app/Resources/css/cache/main.css")
-                .pipe(concatCss(""+pages[i][1]+".css",{rebaseUrls:false}))
-                .pipe(gulp.dest("./web/resources/"+pages[i][1]+"/cache/"));
+            stream.push(gulp.src("../app/Resources/css/cache/main.css")
+                .pipe(concatCss(""+page[1]+".css",{rebaseUrls:false}))
+                .pipe(gulp.dest("../web/bundles/"+page[0]+"/"+page[1]+"/cache/")));
         }
-    }
-    
+    });
+
+    //merge all stream
     return merge(stream);
 
 });

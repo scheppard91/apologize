@@ -5,24 +5,67 @@
 var gulp      = require('gulp');
 var fs        = require("fs");
 var uglify    = require('gulp-uglifyjs');
-var merge     = require('gulp-merge');
+var merge     = require('merge-stream');
+var vm        = require('vm');
 
+// import tool.js
+eval(fs.readFileSync(__dirname + "/tool.js")+'');
+
+// compress js
 gulp.task('js_compress', function() {
+
+    // stream for procedural execution
     var stream = [];
-    var pages = fs.readdirSync('./web/resources');
 
-    for (var i = 0; i < pages.length; i++) {
-        if(pages[i] == "img" || pages[i] == "fonts") {
-            pages.splice(i, 1);i--;
-        }
-    }
+    // list of ressource bundles
+    var pagesBundle = getRessourceBundleList();
 
-    for (var i = 0; i < pages.length; i++) {
-        stream[i] = gulp.src("./web/resources/"+pages[i]+"/cache/*.js")
-            //.pipe(uglify())
-            .pipe(gulp.dest("./web/resources/"+pages[i]+"/"))
-        console.log('css_compress');
-    }
+    //compress css for all bundle
+    pagesBundle.forEach(function(pageBundle){
 
+        //return ressource page
+        var pages = getRessourcePageList(pageBundle);
+
+        // compress js
+        pages.forEach(function(page){
+            stream.push(gulp.src("../web/bundles/"+pageBundle+"/"+page+"/cache/*.js")
+            //  .pipe(uglify())
+                .pipe(gulp.dest("../web/bundles/"+pageBundle+"/"+page+"/")));
+        })
+    });
+
+    //merge all stream
     return merge(stream);
 });
+
+/*
+ gulp.task('css_compress', function() {
+ var x = 0
+ var stream = [];
+ var pagesBundle = fs.readdirSync('../web/bundles/');
+ for (var i = 0; i < pagesBundle.length; i++) {
+ if(pagesBundle[i] == "framework" || pagesBundle[i] == "images") {
+ pagesBundle.splice(i, 1);i--;
+ }
+ }
+ console.log(pagesBundle);
+
+ for (var i = 0; i < pagesBundle.length; i++) {
+ var pages = fs.readdirSync('../web/bundles/'+ pagesBundle[i]);
+ console.log(pages)
+ for (var y = 0; y < pages.length; y++) {
+ if(pages[y] == "images") {
+ pages.splice(y, 1);y--;
+ }
+ }
+
+ for (var y = 0; y < pages.length; y++) {
+ stream[x] = gulp.src("../web/bundles/"+pagesBundle[i]+"/"+pages[y]+"/cache/*.css")
+ //.pipe(minifyCss())
+ .pipe(gulp.dest("../web/bundles/"+pagesBundle[i]+"/"+pages[y]+"/"))
+ x++
+ }
+ }
+ return merge(stream);
+ });
+ */

@@ -1,0 +1,29 @@
+{% extends 'PresentationBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href={{ asset('bundles/PresentationBundle/game/game.css')}}>
+{% endblock %}
+
+{% block title %}Apologize{% endblock %}
+
+{% block mainbody %}
+    <ul class="cards">
+        {% for game in gameList %}
+            <li class="cards__item">
+                <div class="card">
+                    <div class="card__image" style="background-image:url({{ asset('bundles/GameBundle/images/')}}{{ game.imageName }});"></div>
+                    <div class="card__content">
+                        <div class="card__title">{{ game.name }}</div>
+                        <p class="card__text">This is the shorthand for flex-grow, flex-shrink and flex-basis combined. The second and third parameters (flex-shrink and flex-basis) are optional. Default is 0 1 auto. </p>
+                        <button class="btn btn--block card__btn">Button</button>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src={{ asset('bundles/PresentationBundle/game/game.js.js')}} type="text/javascript"></script>
+{% endblock %}
