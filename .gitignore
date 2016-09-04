@@ -1,17 +1,14 @@
 /app/bootstrap.php.cache
-/app/cache/*
+/var/cache/*
 !app/cache/.gitkeep
 /app/config/parameters.yml
-/app/logs/*
+/var/logs/*
 !app/logs/.gitkeep
 /app/phpunit.xml
 /bin/
-/composer.phar
 /vendor/
-/web/bundles/
 /.idea
 /Capfile
-/webpack/
 /app/config/deploy.rb
 /app/.htaccess
 /src/.htaccess
@@ -20,3 +17,5 @@
 /**/cache/
 # Npm
 /node_modules/
+/var/logs/
+/var/sessions/
