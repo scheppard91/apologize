@@ -1,11 +1,8 @@
 /app/bootstrap.php.cache
-/var/cache/*
 !app/cache/.gitkeep
 /app/config/parameters.yml
-/var/logs/*
 !app/logs/.gitkeep
 /app/phpunit.xml
-/bin/
 /vendor/
 /.idea
 /Capfile
